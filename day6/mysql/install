@@ -1,0 +1,3 @@
+pip install mysqlclient
+# Note: On some systems, you might need to install development libraries 
+# for MySQL first (e.g., 'sudo apt-get install libmysqlclient-dev' on Debian/Ubuntu).

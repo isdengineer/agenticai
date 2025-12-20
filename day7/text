@@ -1,0 +1,24 @@
+Explanation of Advanced Concepts
+This example moves away from the simple create_agent wrapper by manually assembling the components using LCEL (LangChain Expression Language).
+
+Strict Planning Prompt:
+
+The PLANNING_PROMPT is the most critical element. It uses few-shot instructions (by providing an example plan structure) and system constraints ("break it down into a numbered list," "must clearly state which tool to use") to force the LLM into a specific, parseable output format.
+
+The quality of this prompt directly determines the success of the entire workflow.
+
+Custom Execution Logic (execute_plan function):
+
+This is the advanced part! Instead of relying on a pre-built agent executor to handle the Thought/Action/Observation loop, we write a custom state machine in Python using a RunnableLambda.
+
+It uses a simple Regular Expression (re) to parse the structured output (the plan) from the LLM.
+
+This allows you to implement complex logic like error handling, conditional branching, or special data formatting between tool calls, which is difficult with standard agents.
+
+Manual Chain Assembly with RunnableSequence:
+
+We use RunnableSequence (or simply the pipe operator |) to string together the three distinct phases: Planning → Execution → Synthesis.
+
+RunnableLambda is used to insert standard Python functions (execute_plan) into the flow, making the entire pipeline modular and testable.
+
+The manual handling of the dictionary keys (e.g., lambda plan: {"question": ..., "plan": plan}) is necessary to ensure the required context (question, plan, tool_observations) is available at each subsequent step.

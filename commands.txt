@@ -1,0 +1,125 @@
+
+
+Use Docker images
+docker run --name mydb -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql:5.7
+
+
+
+docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+docker exec -it ollama ollama pull llama3
+
+docker exec -it ollama ollama pull mistral
+docker exec -it ollama ollama pull nomic-embed-text
+docker exec -it ollama ollama list
+
+
+docker exec -it ollama ollama run llama3
+curl http://localhost:11434/api/generate -d '{
+  "model": "llama3",
+  "prompt":"Why is the sky blue?"
+}'
+
+
+curl http://localhost:11434/api/chat -d '{
+  "model": "llama3",
+  "messages": [
+    { "role": "user", "content": "why is the sky blue?" }
+  ]
+}'
+
+
+calling customer care ---> english -----> input ---tokens ---AI system (query) --sources--->summarize --->voice ---customer
+
+
+ --------------------------------------------help supports documents
+calling customer care-->english -->
+
+-----------------------------------------------------customer related ---> internal api  
+
+curl --location 'http://localhost:11434/api/chat' \
+--header 'Content-Type: application/json' \
+--data '{
+  "model": "llama3",
+  "messages": [
+    { "role": "user", "content": "why is the sky blue?" }
+  ]
+}'
+
+
+pip install langchain-community langchain-core
+pip install langchain-community langchain-core faiss-cpu
+
+pip install streamlit langchain-community langchain-core
+streamlit run streamlit_chatroom.py
+pip install pydantic==1.10.8
+
+# Install core LangChain modules
+pip install langchain langchain-community langchain-core
+
+# Install the dependencies you need for your RAG example
+pip install ollama pydantic
+
+pip install "mcp[cli]" numpy
+
+pip install llama-index llama-index-llms-ollama llama-index-tools-mcp
+
+ConversationBufferMemory: Stores the complete, raw history (Buffer).
+ConversationSummaryMemory: Stores a continuously updated summary of the conversation (Summarization).
+ConversationBufferWindowMemory: Stores only the last $K$ interactions (Windowing).
+
+
+CREATE TABLE ollama_chat_history (
+    -- Primary Key: Unique ID for each message/row
+    id INT NOT NULL AUTO_INCREMENT,
+    
+    -- Session ID: The unique identifier that groups messages into a conversation
+    -- LangChain will filter on this column to load the correct history.
+    session_id VARCHAR(255) NOT NULL,
+    
+    -- Message Content: Stores the serialized chat message object (HumanMessage, AIMessage, etc.)
+    -- TEXT or MEDIUMTEXT is needed to handle longer conversation messages.
+    message TEXT NOT NULL,
+    
+    -- Constraints and Indices
+    PRIMARY KEY (id),
+    -- Indexing the session_id is CRITICAL for fast history retrieval
+    INDEX idx_session_id (session_id) 
+    
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+C:\Users\VISHWA\AppData\Roaming\Python\Python311\Scripts\streamlit run C:\ml\code\day8\strealiteg\basic_viewer.py
+
+C:\Users\VISHWA\AppData\Roaming\Python\Python311\Scripts\streamlit run C:\ml\code\day8\strealiteg\intermediate_filter.py
+
+C:\Users\VISHWA\AppData\Roaming\Python\Python311\Scripts\streamlit run C:\ml\code\day8\strealiteg\advanced_multipage.py
+
+
+C:\Users\VISHWA\AppData\Roaming\Python\Python311\Scripts\streamlit run C:\ml\code\day8\streammysql.py
+
+C:\Users\VISHWA\AppData\Roaming\Python\Python311\Scripts\streamlit C:\ml\code\day8\streamweb.py
+
+
+https://raw.githubusercontent.com/othneildrew/Best-README-Template/refs/heads/main/CHANGELOG.md
+
+https://raw.githubusercontent.com/othneildrew/Best-README-Template/refs/heads/main/LICENSE.txt
+
+https://raw.githubusercontent.com/remarkjs/react-markdown/refs/heads/main/readme.md
+
+
+pip install "praisonaiagents[llm,mcp]"
+
+set OPENAI_BASE_URL=http://localhost:11434/v1
+set OPENAI_API_KEY=NA
+
+# Install LangChain, the LangChain-Ollama connector, and the MCP client
+pip install langchain-community langchain-core mcp
+
+# We will use the standard 'npx @mcp/calculator@latest' tool, so Node.js/npm is still required.
+
+# Run this command in your terminal:
+pip install langchain-mcp-adapters
+
+pip install "mcp[langchain]"
+
+pip install git+https://github.com/modelcontextprotocol/python-sdk.git

@@ -1,0 +1,18 @@
+curl -X POST http://localhost:8000/webhook \
+-H "Content-Type: application/json" \
+-d '{
+    "source": "Monitoring-System-A",
+    "event_id": "ALERT-2025-4567",
+    "message": "The latency of the public API is showing mild spikes (150ms-250ms) but is below critical threshold (300ms).",
+    "timestamp": "2025-12-01T17:30:00Z"
+}'
+
+
+curl -X POST http://localhost:8000/webhook \
+-H "Content-Type: application/json" \
+-d '{
+    "source": "Critical-Alert-Engine",
+    "event_id": "CRITICAL-2025-9999",
+    "message": "Database write operations are failing in Region-EU. Error code 503 Service Unavailable. 95% of transactions affected.",
+    "timestamp": "2025-12-01T17:35:00Z"
+}'
