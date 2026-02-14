@@ -1,0 +1,1 @@
+Alice Smith. Experience: 5 years of Python, SQL, and Machine Learning. Built several Agentic AI workflows using MCP.
