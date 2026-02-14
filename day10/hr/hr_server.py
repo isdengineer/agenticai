@@ -8,13 +8,25 @@ db_config = {'host': 'localhost', 'user': 'root', 'password': 'root', 'database'
 @mcp.tool()
 def list_resumes() -> list:
     """Lists all resume files in the directory."""
-    return [f for f in os.listdir(".") if f.startswith("resume_")]
+    return [f for f in os.listdir("C://ml//code//day10//hr") if f.startswith("resume_")]
 
 @mcp.tool()
+@mcp.tool()
 def read_resume(filename: str) -> str:
-    """Reads the content of a specific resume."""
-    with open(filename, "r") as f:
-        return f.read()
+    """Reads the content of a specific resume file from the local directory."""
+    # Get the absolute path of the current directory
+    base_path = "C://ml//code//day10//hr"
+    file_path = base_path+"//"+ filename
+    
+    
+    if not os.path.exists(file_path):
+        return f"ERROR: File not found at {file_path}. Please check the filename."
+        
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            return f.read()
+    except Exception as e:
+        return f"ERROR: Could not read file: {str(e)}"
 
 @mcp.tool()
 def add_to_shortlist(name: str, skills: str, score: int, reasoning: str):

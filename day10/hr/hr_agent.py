@@ -19,9 +19,14 @@ async def main():
             tools = [{"type": "function", "function": {"name": t.name, "description": t.description, "parameters": t.inputSchema}} for t in mcp_tools.tools]
 
             # The "Hiring Manager" Prompt
-            prompt = ("Find all resumes in the folder. We are looking for an 'AI Engineer' with Python and SQL skills. "
-                      "Read each resume. If a candidate is a good match (score > 70), use the tool to add them "
-                      "to the MySQL shortlist. Be strict.")
+            # UPDATE THIS IN YOUR hr_agent.py
+            prompt = (
+                "1. FIRST, call the list_resumes tool to see exactly which files exist. "
+                "2. ONLY read the files returned by list_resumes. "
+                "3. DO NOT invent or hallucinate any candidates. If you don't find a resume file, do not report a person. "
+                "4. For each ACTUAL file found, use read_resume, evaluate it, and if they match the 'AI Engineer' "
+                "role (Python/SQL skills), call add_to_shortlist."
+            )
 
             messages = [{"role": "user", "content": prompt}]
             print("🕵️  Agentic Recruiter is scanning resumes...")
